@@ -24,7 +24,7 @@ git clone https://github.com/sanatnair/Glovebox_Segmentation_Dataset_Tools
 
 ### 2. Create a Virtual Environment (Optional, but Recommended)
 
-Using virtualenv (recommended for Python virtual environment):
+Using `virtualenv` (recommended for Python virtual environment):
 
 ```
 # Install virtualenv if you haven't already
@@ -37,7 +37,7 @@ virtualenv glovebox_env
 source glovebox_env/bin/activate
 ```
 
-Using conda (if you prefer Conda environments):
+Using `conda` (if you prefer Conda environments):
 
 ```
 # Create a Conda environment
@@ -49,7 +49,7 @@ conda activate glovebox_tools
 
 ### 3. Install Dependencies
 
-Install the required Python packages using pip:
+Install the required Python packages using `pip`:
 
 ```
 pip install -r requirements.txt

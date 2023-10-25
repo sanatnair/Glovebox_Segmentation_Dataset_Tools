@@ -6,11 +6,18 @@ from math import floor, ceil
 from datetime import datetime
 import pandas as pd
 import argparse
+from typing import List, Tuple, Optional
 
 
-def sorter(files):
+def sorter(files: List[str]) -> Tuple[List[str], List[str]]:
     """
-        Sorts the files into either in-distribution or out-of distribution list
+    Sorts the input file names into in-distribution (ID) and out-of-distribution (OOD) lists.
+    
+    Args:
+        files (List[str]): List of file names to be sorted.
+        
+    Returns:
+        Tuple[List[str], List[str]]: A tuple containing two lists - ID files and OOD files.
     """
 
     id = []
@@ -32,16 +39,41 @@ def sorter(files):
             print(f"lonely {file}")
     return id, ood
 
-
-def extract_frames(participant, frames, view, dist_type, output_dir, initial_frame, csv_path=None):
+def extract_frames(participant: int, frames: int, view: str, dist_type: str, 
+                   output_dir: str, initial_frame: int, csv_path: Optional[str] = None) -> None:
     """
-        Collects an equally distributed sample of frames from the specified videos
-        and saves the unlabelled frames to its respective folder location.
-    """
+    Collects an equally distributed sample of frames from the specified videos
+    and saves the unlabelled frames to their respective folder locations.
     
-    def get_save_path(subject_number, dist_type, experiment_type, view, name, frame_num,output_dir=None):
+    Args:
+        participant (int): Participant number.
+        frames (int): Number of frames to sample.
+        view (str): Video view ('Top_View' or 'Side_View').
+        dist_type (str): Distribution type ('id' for in-distribution, 'ood' for out-of-distribution).
+        output_dir (str): Output directory for sampled frames.
+        initial_frame (int): Initial frame for sampling.
+        csv_path (str, optional): Path for the CSV file.
+
+    Returns:
+        None
+    """
+
+    def get_save_path(subject_number: int, dist_type: str, experiment_type: str, view: str, 
+                  name: str, frame_num: int, output_dir: Optional[str] = None) -> str:
         """
-        Returns the path where the label will be saved
+        Returns the path where the label will be saved.
+        
+        Args:
+            subject_number (int): Participant number.
+            dist_type (str): Distribution type ('id' or 'ood').
+            experiment_type (str): Experiment type.
+            view (str): Video view ('Top_View' or 'Side_View').
+            name (str): File name.
+            frame_num (int): Frame number.
+            output_dir (str, optional): Output directory for sampled frames.
+
+        Returns:
+            str: The path where the label will be saved.
         """
 
         if output_dir:
@@ -88,6 +120,9 @@ def extract_frames(participant, frames, view, dist_type, output_dir, initial_fra
         num_samples = frames_per_file
 
         # here we get an equal distribution of frames from the initial frame defined and the last frame of the video
+        if num_samples == 1:
+            frame_numbers = np.linspace(initial_frame, num_frames, 5).tolist()
+            frame_numbers = [frame_numbers[2]]  # Select the third frame
         if num_samples > 2:
             frame_numbers = np.linspace(
                 initial_frame, num_frames, num_samples).tolist()

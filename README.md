@@ -44,7 +44,7 @@ Using `conda` (if you prefer Conda environments):
 conda env create -f environment.yml
 
 # Activate the Conda environment
-conda activate glovebox_tools
+conda activate glovebox_tool
 ```
 
 ### 3. Install Dependencies

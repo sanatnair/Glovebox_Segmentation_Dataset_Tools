@@ -83,28 +83,32 @@ def extract_frames(participant: int, frames: int, view: str, dist_type: str,
         return save_path
     
     # identify and sort specified files
-    top_files = os.listdir(f"./videos/Test_Subject_{participant}/{view}")
+    try:
+        top_files = os.listdir(f"./videos/Test_Subject_{participant}/{view}")
+    except FileNotFoundError:
+        print('It seems the participant requested is not in the dataset files. '
+              'Please revise the CLI argument and/or the video file directory.')
+        return
     id_files, ood_files = sorter(top_files)
 
     # visual output of specified parameters 
-    if dist_type == "ood":
-        if len(ood_files) == 0:
-            print(f"No files of distribution type '{dist_type}' found for the specified participant and view.")
-            return
-        selected_files = ood_files
-        dist_type_print = 'out-of-distribution'
-        print(f"Sampling {frames} {dist_type_print} frames from {view} view.")
-        frames_per_file = frames // len(selected_files)
-    elif dist_type == "id":
-        if len(id_files) == 0:
-            print(f"No files of distribution type '{dist_type}' found for the specified participant and view.")
-            return
-        selected_files = id_files
-        dist_type_print = 'in-distribution'
-        print(f"Sampling {frames} {dist_type_print} frames from {view} view.")
-        frames_per_file = frames // len(selected_files)
+    try:
+        if dist_type == "ood":
+            selected_files = ood_files
+            dist_type_print = 'out-of-distribution'
+            print(f"Sampling {frames} {dist_type_print} frames from {view} view.")
+            frames_per_file = frames // len(selected_files)
+        elif dist_type == "id":
+            selected_files = id_files
+            dist_type_print = 'in-distribution'
+            print(f"Sampling {frames} {dist_type_print} frames from {view} view.")
+            frames_per_file = frames // len(selected_files)
+    except ZeroDivisionError:
+        print('It seems that the requested distribution type is not found for the specified participant and view. '
+              'Please revise the CLI argument and/or the video file directory.')
+        return
 
-    print(f"The sampling interval is {frames_per_file}")
+    print(f"Frames sampled per file is {frames_per_file}.")
 
     # extract frames from each video file
     for i, file in enumerate(selected_files):
@@ -120,16 +124,21 @@ def extract_frames(participant: int, frames: int, view: str, dist_type: str,
         num_samples = frames_per_file
 
         # here we get an equal distribution of frames from the initial frame defined and the last frame of the video
-        if num_samples == 1:
-            frame_numbers = np.linspace(initial_frame, num_frames, 5).tolist()
-            frame_numbers = [frame_numbers[2]]  # Select the third frame
-        if num_samples > 2:
-            frame_numbers = np.linspace(
-                initial_frame, num_frames, num_samples).tolist()
-        if num_samples == 2:
-            frame_numbers = np.linspace(initial_frame, num_frames, 4).tolist()
-            frame_numbers = frame_numbers[1:3]
-        frame_numbers = [int(floor(frame_num)) for frame_num in frame_numbers]
+        try:
+            if num_samples == 1:
+                frame_numbers = np.linspace(initial_frame, num_frames, 5).tolist()
+                frame_numbers = [frame_numbers[2]]  # Select the third frame
+            if num_samples > 2:
+                frame_numbers = np.linspace(
+                    initial_frame, num_frames, num_samples).tolist()
+            if num_samples == 2:
+                frame_numbers = np.linspace(initial_frame, num_frames, 4).tolist()
+                frame_numbers = frame_numbers[1:3]
+            frame_numbers = [int(floor(frame_num)) for frame_num in frame_numbers]
+        except OSError:
+            print('It seems the requested initial frame and/or number of frames exceeds the available amount of frames. '
+                  'Please revise the CLI argument and/or check the status of the video file(s)')
+            return
 
         # moviepy only takes time in seconds to return a frame, so we calculate the time(s) of the video
         # using the frame we want and the FPS of the video

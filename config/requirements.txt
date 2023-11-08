@@ -1,4 +1,4 @@
 moviepy==1.0.3
-numpy==1.25.2
-pandas==1.5.3
+numpy==1.26.0
+pandas==2.1.2
 Pillow==10.1.0

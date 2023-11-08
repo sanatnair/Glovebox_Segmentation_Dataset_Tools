@@ -22,7 +22,7 @@ Clone the repository to your local machine using `git`:
 git clone https://github.com/sanatnair/Glovebox_Segmentation_Dataset_Tools
 ```
 
-### 2. Create a Virtual Environment & Install Dependencies (Optional, but Recommended)
+### 2. Create a Virtual Environment (Optional, but Recommended)
 
 Using `virtualenv` (recommended for Python virtual environment):
 
@@ -54,23 +54,27 @@ glovebox_env\Scripts\activate
 source glovebox_env/Scripts/activate
 ```
 
-Install required dependencies:
+Next, ensure to install the required [dependencies](#3-install-required-dependencies):
+
+Using `conda` (if you prefer Conda environments):
+
+```
+# Create a Conda environment with the required dependencies
+conda env create -f environment.yml
+
+# Activate the Conda environment
+conda activate glovebox_tool
+```
+
+### 3. Install required dependencies
+
+Ensure to install the required dependencies in the `config` folder (not needed if using `conda`)
 
 ```
 pip install -r requirements.txt
 ```
 
-Using `conda` (if you prefer Conda environments):
-
-```
-# Create a Conda environment
-conda env create -f environment.yml
-
-# Activate the Conda environment with the required dependencies
-conda activate glovebox_tool
-```
-
-### 3. Run the Tool
+### 4. Run the Tool
 
 You can now run the frame extraction tool with the desired command-line arguments outlined in the [Usage](#usage) section
 

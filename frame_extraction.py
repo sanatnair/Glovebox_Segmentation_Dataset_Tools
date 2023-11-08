@@ -1,5 +1,5 @@
 """
-Code Maintainers: Sanat Nair <moniker@utexas.edu>; Shivansh Sharma <moniker@utexas.edu>
+Code Maintainers: Sanat Nair <sanatnair@utexas.edu>; Shivansh Sharma <shivansh.s@utexas.edu>
 
 Purpose: Extract frames from videos of glovebox dataset
 """
@@ -269,7 +269,7 @@ if __name__ == "__main__":
         extract_frames(args.participant, sample_frames, args.view,
                        'ood', args.output_dir, args.initial_frame, args.csv_path)
     else:
-        # Take samples from id xor ood datasets
+        # Take samples from id or ood datasets
         extract_frames(args.participant, sample_frames, args.view,
                        args.dist_type, args.output_dir, args.initial_frame, args.csv_path)
 

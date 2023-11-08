@@ -54,7 +54,7 @@ glovebox_env\Scripts\activate
 source glovebox_env/Scripts/activate
 ```
 
-Next, ensure to install the required [dependencies](#3-install-required-dependencies):
+Ensure to install the required [dependencies](#3-install-required-dependencies)
 
 Using `conda` (if you prefer Conda environments):
 
@@ -68,7 +68,7 @@ conda activate glovebox_tool
 
 ### 3. Install required dependencies
 
-Ensure to install the required dependencies in the `config` folder (not needed if using `conda`)
+Ensure to install the required dependencies from the `config` folder (not needed if using a `conda` environment)
 
 ```
 pip install -r requirements.txt

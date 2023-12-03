@@ -80,8 +80,9 @@ You can now run the frame extraction tool with the desired command-line argument
 
 ## Usage
 
-1. Ensure glovebox dataset video files are saved in the [videos](/videos) folder as outlined in the videos [README](/videos/README.md)
-2. Run the script using the command line interface as follows:
+1. Download the dataset video files from [here](https://utexas.box.com/s/6atsg78aq0aqbnvybr1biuhzn77qv5fx)
+2. Ensure glovebox dataset video files are saved in the [videos](/videos) folder as outlined in the videos [README](/videos/README.md)
+3. Run the script using the command line interface as follows:
 
 ```
 python frame_extraction.py -p PARTICIPANT_NUMBER -f NUM_FRAMES -v VIEW -d DISTRIBUTION_TYPE -o OUTPUT_DIR -i INITIAL_FRAME -c CSV_PATH
@@ -96,3 +97,16 @@ python frame_extraction.py -p 2 -f 4 -v Side_View -d id -o test_images -i 10 -c 
 _This command will generate four equally spaced in-distribution frames from the Side View of participant 2, starting at the initial frame of 10. The extracted frames will be created and/or saved in the `test_images` folder, and the CSV files will be stored in the `test_csv` folder, both within the same directory_
 
 **Note: Required arguments include `PARTICIPANT_NUMBER`, `NUM_FRAMES`, and `VIEW`. Input for `PARTICPANT_NUMBER` ranges from available files and `VIEW` includes 'Side_View' or 'Top_View'. If `INITIAL_FRAME` is not provided, it will defualt to initial frame = 0. If `DISTRIBUTION_TYPE` ['ood', 'id', 'all'] is not provided, it will default to the equal sampling of both. Finally, `OUTPUT_DIR` and `CSV_PATH` will find and/or create the path if provided, else automatically create a path if not provided**
+
+### Default Configurations
+
+Consider the following CLI imputs to replicate the configurations utilized by the researchers:
+
+```
+python frame_extraction.py -p # -f 60 -v Top_View -d id
+python frame_extraction.py -p # -f 60 -v Side_View -d id
+python frame_extraction.py -p # -f 12 -v Top_View -d ood
+python frame_extraction.py -p # -f 12 -v Side_View -d ood
+
+_The partcipant number originally utilized by the reseachers included paricipants 1-12_
+```

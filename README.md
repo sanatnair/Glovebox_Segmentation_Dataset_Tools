@@ -107,6 +107,6 @@ python frame_extraction.py -p # -f 60 -v Top_View -d id
 python frame_extraction.py -p # -f 60 -v Side_View -d id
 python frame_extraction.py -p # -f 12 -v Top_View -d ood
 python frame_extraction.py -p # -f 12 -v Side_View -d ood
-
-_The partcipant number originally utilized by the reseachers included paricipants 1-12_
 ```
+
+_Note: The partcipant numbers originally utilized by the reseachers included 1-12_

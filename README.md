@@ -80,7 +80,7 @@ You can now run the frame extraction tool with the desired command-line argument
 
 ## Usage
 
-1. Download the dataset video files from [here](https://utexas.box.com/s/6atsg78aq0aqbnvybr1biuhzn77qv5fx)
+1. Download the dataset video files from [here](https://doi.org/10.18738/T8/85R7KQ)
 2. Ensure glovebox dataset video files are saved in the [videos](/videos) folder as outlined in the videos [README](/videos/README.md)
 3. Run the script using the command line interface as follows:
 

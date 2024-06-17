@@ -88,10 +88,10 @@ def extract_frames(participant: int, frames: int, view: str, dist_type: str,
 
         if output_dir:
             save_path = os.path.join(f"{output_dir}/Test_Subject_{subject_number}/"
-                                     f"{dist_type}/{experiment_type}/{view}/{name}_{frame_num}.png")
+                                     f"{dist_type}/{experiment_type}_task/{view}/{name}_{frame_num}.png")
         else:
             save_path = (f"./images/Test_Subject_{subject_number}/"
-                         f"{dist_type}/{experiment_type}/{view}/{name}_{frame_num}.png")
+                         f"{dist_type}/{experiment_type}_task/{view}/{name}_{frame_num}.png")
         return save_path
 
     # identify and sort specified files
@@ -200,30 +200,30 @@ def extract_frames(participant: int, frames: int, view: str, dist_type: str,
             # saving frames in specified output directiory
             if output_dir:
                 os.makedirs(f"{output_dir}/Test_Subject_{participant}/"
-                            f"{dist_type}/{experiment_type}/{view}/", exist_ok=True)
+                            f"{dist_type}/{experiment_type}_task/{view}/", exist_ok=True)
                 image.save(get_save_path(participant, dist_type,
                                          experiment_type, view, name, frame_num, output_dir))
             else:
                 os.makedirs(
                     f"./images/Test_Subject_{participant}/"
-                    f"{dist_type}/{experiment_type}/{view}/", exist_ok=True)
+                    f"{dist_type}/{experiment_type}_task/{view}/", exist_ok=True)
                 image.save(get_save_path(participant, dist_type,
                                          experiment_type, view, name, frame_num, output_dir))
 
         # saving info as csv file in specified directory
         if csv_path:
             csv_directory = os.path.join(csv_path, f"Test_Subject_{participant}/"
-                                                   f"{dist_type}/{experiment_type}/{view}")
+                                                   f"{dist_type}/{experiment_type}_task/{view}")
             os.makedirs(csv_directory, exist_ok=True)
             csv_file_path = os.path.join(csv_directory, 'labelhistory.csv')
         # if csv directory not specified but output directory is
         elif output_dir:
             csv_file_path = (f"{output_dir}/Test_Subject_{participant}/"
-                             f"{dist_type}/{experiment_type}/{view}/labelhistory.csv")
+                             f"{dist_type}/{experiment_type}_task/{view}/labelhistory.csv")
         # if neither directory is specified
         else:
             csv_file_path = (f"./images/Test_Subject_{participant}/"
-                             f"{dist_type}/{experiment_type}/{view}/labelhistory.csv")
+                             f"{dist_type}/{experiment_type}_task/{view}/labelhistory.csv")
         data = [{
             "File name": name,
             "Time of file writes": datetime.now(),
